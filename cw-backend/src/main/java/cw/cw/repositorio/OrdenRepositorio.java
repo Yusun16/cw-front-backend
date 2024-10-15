@@ -12,8 +12,8 @@ public interface OrdenRepositorio extends JpaRepository<Orden, Integer> {
     @Query(value="select codigo from orden where id_orden=(select max(id_orden) from orden);",nativeQuery = true)
     String buscarCodigo();
 
-    List<Orden> findByIdOrdenOrClienteAndPlacaVehiculoOrFecha(
-            Integer idOrden, String cliente, String placaVehiculo, LocalDate fecha
+    List<Orden> findByIdOrdenOrClienteOrSerialOrFecha(
+            Integer idOrden, String cliente, String serial, LocalDate fecha
     );
 
 }

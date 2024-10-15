@@ -38,8 +38,8 @@ public class OrdenServicio implements IOrdenServicio{
     }
 
     @Override
-    public List<Orden> listordenbyparanst(Integer codigo, String cliente, String placaVehiculo, LocalDate fecha) {
-        return ordenRepositorio.findByIdOrdenOrClienteAndPlacaVehiculoOrFecha(codigo, cliente, placaVehiculo, fecha );
+    public List<Orden> listordenbyparanst(Integer idOrden, String cliente, String serial, LocalDate fecha) {
+        return ordenRepositorio.findByIdOrdenOrClienteOrSerialOrFecha(idOrden, cliente, serial, fecha );
 
     }
 

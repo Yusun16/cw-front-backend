@@ -36,7 +36,7 @@ body {
 }
 
 .colonav {
-  background-color: #D95447;
+  background-color: #0D0D0D;
 }
 
 .colorthead {
@@ -1651,3 +1651,4 @@ li {
 .offcanvas-menu input[type="checkbox"]:checked~nav ul li:nth-child(7) {
   transition-delay: 0.7s;
 }
+

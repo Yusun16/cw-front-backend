@@ -2,27 +2,27 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 export default function BuscarOrden() {
-    const urlBase = "http://localhost:8080/serviteca";
+    const urlBase = "http://localhost:8080/cw";
 
     const [ordenes, setOrdenes] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(7);
 
     // Estados para los campos de búsqueda
-    const [codigo, setidOrden] = useState('');
+    const [idOrden, setidOrden] = useState('');
     const [cliente, setCliente] = useState('');
     const [fecha, setFecha] = useState('');
-    const [placaVehiculo, setPlacaVehiculo] = useState('');
+    const [serial, setSerial] = useState('');
 
     // Manejo del envío del formulario de búsqueda
     const handleBuscar = async (e) => {
         e.preventDefault();
 
         const filtros = {};
-        if (codigo) filtros.codigo = codigo;
+        if (idOrden) filtros.idOrden = idOrden;
         if (cliente) filtros.cliente = cliente;
         if (fecha) filtros.fecha = fecha;
-        if (placaVehiculo) filtros.placaVehiculo = placaVehiculo;
+        if (serial) filtros.serial = serial;
 
         await cargarOrdenes(filtros);
 
@@ -69,9 +69,9 @@ export default function BuscarOrden() {
                         <div className="row">
                             <div className="col-12 mb-3">
                                 <div className="mb-3 row">
-                                    <label htmlFor="codigo" className="col-sm-3 col-form-label">N° de servicio:*</label>
+                                    <label htmlFor="idOrden" className="col-sm-3 col-form-label">N° de servicio:*</label>
                                     <div className="col-sm-6">
-                                        <input type="text" className="form-control" id="codigo" name='codigo' value={codigo} onChange={(e) => setidOrden(e.target.value)} />
+                                        <input type="text" className="form-control" id="idOrden" name='idOrden' value={idOrden} onChange={(e) => setidOrden(e.target.value)} />
                                     </div>
                                 </div>
                             </div>
@@ -93,9 +93,9 @@ export default function BuscarOrden() {
                             </div>
                             <div className="col-12 mb-3">
                                 <div className="mb-3 row">
-                                    <label htmlFor="placaVehiculo" className="col-sm-3 col-form-label">Placa:*</label>
+                                    <label htmlFor="serial" className="col-sm-3 col-form-label">Serial:*</label>
                                     <div className="col-sm-6">
-                                        <input type="text" className="form-control" id="placaVehiculo" name='placaVehiculo' value={placaVehiculo} onChange={(e) => setPlacaVehiculo(e.target.value)} />
+                                        <input type="text" className="form-control" id="serial" name='serial' value={serial} onChange={(e) => setSerial(e.target.value)} />
                                     </div>
                                 </div>
                             </div>
@@ -119,21 +119,35 @@ export default function BuscarOrden() {
                                 <tr className='tr-table-tr'>
                                     <th className='th-tabla colorthead text-center' scope="col">Orden de servicio</th>
                                     <th className='th-tabla colorthead text-center' scope="col">Cliente</th>
-                                    <th className='th-tabla colorthead text-center' scope="col">Tipo de servicio</th>
-                                    <th className='th-tabla colorthead text-center' scope="col">Placa del vehículo</th>
-                                    <th className='th-tabla colorthead text-center' scope="col">Kilometraje del Vehículo</th>
-                                    <th className='th-tabla colorthead text-center' scope="col">Fecha de Servicio</th>
+                                    <th className='th-tabla colorthead text-center' scope="col">Cedula</th>
+                                    <th className='th-tabla colorthead text-center' scope="col">Fecha</th>
+                                    <th className='th-tabla colorthead text-center' scope="col">Direccion</th>
+                                    <th className='th-tabla colorthead text-center' scope="col">Telefono</th>
+                                    <th className='th-tabla colorthead text-center' scope="col">Marca</th>
+                                    <th className='th-tabla colorthead text-center' scope="col">Modelo</th>
+                                    <th className='th-tabla colorthead text-center' scope="col">Serial</th>
+                                    <th className='th-tabla colorthead text-center' scope="col">Cargador</th>
+                                    <th className='th-tabla colorthead text-center' scope="col">Bateria</th>
+                                    <th className='th-tabla colorthead text-center' scope="col">Otros</th>
+                                    <th className='th-tabla colorthead text-center' scope="col">Descripcion</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {currentItems.map((orden, indice) => (
                                     <tr className='tr-table-tr text-center' key={indice}>
-                                        <th>{orden.codigo}</th>
+                                        <th>{orden.idOrden}</th>
                                         <td>{orden.cliente}</td>
-                                        <td>{orden.tipoServicio}</td>
-                                        <td>{orden.placaVehiculo}</td>
-                                        <td>{orden.kilometraje}</td>
+                                        <td>{orden.cedula}</td>
                                         <td>{orden.fecha}</td>
+                                        <td>{orden.direccion}</td>
+                                        <td>{orden.telefono}</td>
+                                        <td>{orden.marca}</td>
+                                        <td>{orden.modelo}</td>
+                                        <td>{orden.serial}</td>
+                                        <td>{orden.cargador}</td>
+                                        <td>{orden.bateria}</td>
+                                        <td>{orden.otros}</td>
+                                        <td>{orden.descripcion}</td>
                                     </tr>
                                 ))}
                             </tbody>

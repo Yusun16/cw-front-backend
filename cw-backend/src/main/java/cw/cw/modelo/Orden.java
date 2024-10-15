@@ -23,8 +23,16 @@ public class Orden {
     Integer idOrden;
     String codigo;
     String cliente;
+    String Cedula;
     String tipoServicio;
-    String placaVehiculo;
-    String kilometraje;
+    String Direccion;
+    String Marca;
+    String Modelo;
+    String serial;
+    String Cargador;
+    String Bateria;
+    String Otros;
+    String Telefono;
+    String Descripcion;
     LocalDate fecha;
 }

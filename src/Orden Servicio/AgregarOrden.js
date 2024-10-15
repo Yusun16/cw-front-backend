@@ -8,20 +8,28 @@ export default function AgregarServicio() {
     const [orden, setOrden] = useState({
         codigo: "",
         cliente: "",
+        cedula: "",
         tipoServicio: "",
-        placaVehiculo: "",
-        kilometraje: "",
+        direccion: "",
+        marca: "",
+        modelo: "",
+        serial: "",
+        cargador: "",
+        bateria: "",
+        otros: "",
+        telefono: "",
+        descripcion: "",
         fecha: ""
     });
 
     const [isEditing, setIsEditing] = useState(false); // Controla si se puede editar el formulario
 
-    const { codigo, cliente, tipoServicio, placaVehiculo, kilometraje, fecha } = orden;
+    const { codigo, cliente, cedula, tipoServicio, direccion, marca,modelo,serial,cargador,bateria,otros,telefono,descripcion,fecha} = orden;
 
     // Esta función obtiene el código solo cuando el usuario presiona "Agregar Nueva Orden de Servicio"
     const obtenerCodigo = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/serviteca/generarcodigo');
+            const response = await axios.get('http://localhost:8080/cw/generarcodigo');
             setOrden(prevOrden => ({ ...prevOrden, codigo: response.data }));
         } catch (error) {
             console.error("Error al obtener el código", error);
@@ -34,18 +42,26 @@ export default function AgregarServicio() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const urlBase = "http://localhost:8080/serviteca/ordenservicios";
+        const urlBase = "http://localhost:8080/cw/ordenservicios";
         await axios.post(urlBase, orden);
         setOrden({
             codigo: "",
             cliente: "",
+            cedula: "",
             tipoServicio: "",
-            placaVehiculo: "",
-            kilometraje: "",
+            direccion: "",
+            marca: "",
+            modelo: "",
+            serial: "",
+            cargador: "",
+            bateria: "",
+            otros: "",
+            telefono: "",
+            descripcion: "",
             fecha: ""
         });
         setIsEditing(false);
-        navegacion("/listachequeo");
+        navegacion("/");
     };
 
     const handleAgregarOrden = () => {
@@ -113,64 +129,7 @@ export default function AgregarServicio() {
                 </div>
 
                 <div className="mb-3 row">
-                    <label htmlFor="placaVehiculo" className="col-sm-3 col-form-label">Placa:*</label>
-                    <div className="col-sm-6">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="placaVehiculo"
-                            name='placaVehiculo'
-                            required
-                            value={placaVehiculo}
-                            onChange={onInputChange}
-                            disabled={!isEditing}
-                        />
-                    </div>
-                </div>
-
-                <div className="mb-3 row">
-                    <label htmlFor="tipoServicio" className="col-sm-3 col-form-label">Servicio:*</label>
-                    <div className="col-sm-6">
-                        <select
-                            className="form-select"
-                            id="tipoServicio"
-                            name='tipoServicio'
-                            required
-                            value={tipoServicio}
-                            onChange={onInputChange}
-                            disabled={!isEditing}
-                        >
-                            <option value="">Seleccione un servicio</option>
-                            <option value="Mecanico">Mecánico</option>
-                            <option value="Lavado">Lavado</option>
-                            <option value="Lubricacion">Lubricación</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div className="mb-3 row">
-                    <label htmlFor="kilometraje" className="col-sm-3 col-form-label">Kilometraje Vehículo:*</label>
-                    <div className="col-sm-3">
-                        <input
-                            type="number"
-                            className="form-control"
-                            id="kilometraje"
-                            name='kilometraje'
-                            required
-                            value={kilometraje}
-                            onChange={onInputChange}
-                            disabled={!isEditing}
-                        />
-                    </div>
-                    <div className="col-sm-3">
-                        <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled={!isEditing}>
-                            Cambio de Aceite
-                        </button>
-                    </div>
-                </div>
-
-                <div className="mb-3 row">
-                    <label htmlFor="fecha" className="col-sm-3 col-form-label">Fecha Ingreso:*</label>
+                    <label htmlFor="Fecha" className="col-sm-3 col-form-label">fecha:*</label>
                     <div className="col-sm-6">
                         <input
                             type="date"
@@ -185,36 +144,187 @@ export default function AgregarServicio() {
                     </div>
                 </div>
 
-                <div className="text-center">
-                    <button type="submit" className="btn btn-success" disabled={!isEditing}>Siguiente <i className="fa-solid fa-check" /></button>
-                </div>
-            </form>
-
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <label htmlFor="tipoAceite" className="form-label">Tipo de Aceite:</label>
-                            <select className="form-select" id="tipoAceite">
-                                <option value="Mineral">Mineral</option>
-                                <option value="Sintético">Sintético</option>
-                            </select>
-                            <div className="mt-3">
-                                <label htmlFor="kilometros" className="form-label">Kilómetros Cambio:</label>
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    id="kilometros"
-                                    name='kilometros'
-                                />
-                            </div>
-                        </div>
-                        <div className="modal-footer modal-display justify-content-center">
-                            <button type="button" className="btn btn-success" data-bs-dismiss="modal"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
-                        </div>
+                <div className="mb-3 row">
+                    <label htmlFor="direiccion" className="col-sm-3 col-form-label">Direccion:*</label>
+                    <div className="col-sm-6">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="direccion"
+                            name='direccion'
+                            required
+                            value={direccion}
+                            onChange={onInputChange}
+                            disabled={!isEditing}
+                        />
                     </div>
                 </div>
-            </div>
+
+                <div className="mb-3 row">
+                    <label htmlFor="cedula" className="col-sm-3 col-form-label">Cedeula:</label>
+                    <div className="col-sm-3">
+                        <input
+                            type="number"
+                            className="form-control"
+                            id="cedula"
+                            name='cedula'
+                            required
+                            value={cedula}
+                            onChange={onInputChange}
+                            disabled={!isEditing}
+                        />
+                    </div>
+                </div>
+
+                <div className="mb-3 row">
+                    <label htmlFor="telefono" className="col-sm-3 col-form-label">Telefono:*</label>
+                    <div className="col-sm-6">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="telefono"
+                            name='telefono'
+                            required
+                            value={telefono}
+                            onChange={onInputChange}
+                            disabled={!isEditing}
+                        />
+                    </div>
+                </div>
+
+                <div className="mb-3 row">
+                    <label htmlFor="tipoServicio" className="col-sm-3 col-form-label">Tipo Servicio:*</label>
+                    <div className="col-sm-6">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="fetipoServicio"
+                            name='tipoServicio'
+                            required
+                            value={tipoServicio}
+                            onChange={onInputChange}
+                            disabled={!isEditing}
+                        />
+                    </div>
+                </div>
+
+                <div className="mb-3 row">
+                    <label htmlFor="marca" className="col-sm-3 col-form-label">Marca:*</label>
+                    <div className="col-sm-6">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="marca"
+                            name='marca'
+                            required
+                            value={marca}
+                            onChange={onInputChange}
+                            disabled={!isEditing}
+                        />
+                    </div>
+                </div>
+
+                <div className="mb-3 row">
+                    <label htmlFor="modelo" className="col-sm-3 col-form-label">Modelo:*</label>
+                    <div className="col-sm-6">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="modelo"
+                            name='modelo'
+                            required
+                            value={modelo}
+                            onChange={onInputChange}
+                            disabled={!isEditing}
+                        />
+                    </div>
+                </div>
+
+                <div className="mb-3 row">
+                    <label htmlFor="serial" className="col-sm-3 col-form-label">Serial:*</label>
+                    <div className="col-sm-6">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="serial"
+                            name='serial'
+                            required
+                            value={serial}
+                            onChange={onInputChange}
+                            disabled={!isEditing}
+                        />
+                    </div>
+                </div>
+
+                <div className="mb-3 row">
+                    <label htmlFor="cargador" className="col-sm-3 col-form-label">Cargador:*</label>
+                    <div className="col-sm-6">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="cargador"
+                            name='cargador'
+                            required
+                            value={cargador}
+                            onChange={onInputChange}
+                            disabled={!isEditing}
+                        />
+                    </div>
+                </div>
+
+                <div className="mb-3 row">
+                    <label htmlFor="bateria" className="col-sm-3 col-form-label">Batería:*</label>
+                    <div className="col-sm-6">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="bateria"
+                            name='bateria'
+                            required
+                            value={bateria}
+                            onChange={onInputChange}
+                            disabled={!isEditing}
+                        />
+                    </div>
+                </div>
+
+                <div className="mb-3 row">
+                    <label htmlFor="otros" className="col-sm-3 col-form-label">Otros:*</label>
+                    <div className="col-sm-6">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="otros"
+                            name='otros'
+                            required
+                            value={otros}
+                            onChange={onInputChange}
+                            disabled={!isEditing}
+                        />
+                    </div>
+                </div>
+
+                <div className="mb-3 row">
+                    <label htmlFor="descripcion" className="col-sm-3 col-form-label">Descripcion:*</label>
+                    <div className="col-sm-6">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="descripcion"
+                            name='descripcion'
+                            required
+                            value={descripcion}
+                            onChange={onInputChange}
+                            disabled={!isEditing}
+                        />
+                    </div>
+                </div>
+
+
+                <div className="text-center">
+                    <button type="submit" className="btn btn-success" disabled={!isEditing}>Guardar <i className="fa-solid fa-check" /></button>
+                </div>
+            </form>
         </div>
     );
 }

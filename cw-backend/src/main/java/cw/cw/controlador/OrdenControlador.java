@@ -35,8 +35,8 @@ public class OrdenControlador {
     }
 
     @GetMapping("/buscarorden")
-    public List<Orden> buscarOrdenPorNombre(@RequestParam(required = false) Integer codigo, @RequestParam (required = false) String cliente, @RequestParam (required = false) String placaVehiculo, @RequestParam(required = false) LocalDate fecha){
-    return ordenServicio.listordenbyparanst(codigo,cliente,placaVehiculo,fecha);
+    public List<Orden> buscarOrdenPorNombre(@RequestParam(required = false) Integer idOrden, @RequestParam (required = false) String cliente, @RequestParam(required = false) String serial, @RequestParam(required = false) LocalDate fecha){
+    return ordenServicio.listordenbyparanst(idOrden,cliente,serial,fecha);
     }
 
     @GetMapping("/generarcodigo")
